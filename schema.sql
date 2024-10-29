@@ -1,3 +1,6 @@
+CREATE DATABASE company_db;
+USE company_db;
+
 CREATE TABLE departments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL
