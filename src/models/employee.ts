@@ -1,3 +1,4 @@
+// Purpose: Define the Employee interface.
 export interface Employee {
     id: number;
     first_name: string;
