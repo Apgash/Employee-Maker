@@ -36,10 +36,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inquirer_1 = require("inquirer");
-var pg_1 = require("pg");
+var inquirer_1 = require("inquirer"); // Import inquirer for command-line prompts
+var pg_1 = require("pg"); // Import Client from pg for PostgreSQL connection
 // Create a connection to the database
 var client;
+// Function to initialize the database connection
 function initializeConnection() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
@@ -69,7 +70,7 @@ function viewAllDepartments() {
                 case 0: return [4 /*yield*/, client.query('SELECT id, name FROM departments')];
                 case 1:
                     res = _a.sent();
-                    console.table(res.rows);
+                    console.table(res.rows); // Display the result as a table
                     return [2 /*return*/];
             }
         });
@@ -84,7 +85,7 @@ function viewAllRoles() {
                 case 0: return [4 /*yield*/, client.query("\n    SELECT roles.id, roles.title, departments.name AS department, roles.salary\n    FROM roles\n    JOIN departments ON roles.department_id = departments.id\n  ")];
                 case 1:
                     res = _a.sent();
-                    console.table(res.rows);
+                    console.table(res.rows); // Display the result as a table
                     return [2 /*return*/];
             }
         });
@@ -99,7 +100,7 @@ function viewAllEmployees() {
                 case 0: return [4 /*yield*/, client.query("\n    SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.name AS department, roles.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager\n    FROM employees\n    JOIN roles ON employees.role_id = roles.id\n    JOIN departments ON roles.department_id = departments.id\n    LEFT JOIN employees manager ON manager.id = employees.manager_id\n  ")];
                 case 1:
                     res = _a.sent();
-                    console.table(res.rows);
+                    console.table(res.rows); // Display the result as a table
                     return [2 /*return*/];
             }
         });
@@ -177,7 +178,7 @@ function addEmployee() {
                 case 0: return [4 /*yield*/, client.query('SELECT id, title FROM roles')];
                 case 1:
                     rolesRes = _b.sent();
-                    return [4 /*yield*/, client.query('SELECT id, CONCAT(first_name, " ", last_name) AS name FROM employees')];
+                    return [4 /*yield*/, client.query('SELECT id, CONCAT(first_name, \' \', last_name) AS name FROM employees')];
                 case 2:
                     employeesRes = _b.sent();
                     return [4 /*yield*/, inquirer_1.default.prompt([
@@ -227,7 +228,7 @@ function updateEmployeeRole() {
         var employeesRes, rolesRes, _a, employee_id, role_id;
         return __generator(this, function (_b) {
             switch (_b.label) {
-                case 0: return [4 /*yield*/, client.query('SELECT id, CONCAT(first_name, " ", last_name) AS name FROM employees')];
+                case 0: return [4 /*yield*/, client.query('SELECT id, CONCAT(first_name, \' \', last_name) AS name FROM employees')];
                 case 1:
                     employeesRes = _b.sent();
                     return [4 /*yield*/, client.query('SELECT id, title FROM roles')];
@@ -274,7 +275,7 @@ function main() {
                     _b.trys.push([0, 22, , 23]);
                     return [4 /*yield*/, initializeConnection()];
                 case 1:
-                    _b.sent();
+                    _b.sent(); // Initialize the database connection
                     _b.label = 2;
                 case 2:
                     if (!true) return [3 /*break*/, 21];
@@ -339,18 +340,18 @@ function main() {
                     console.log('Goodbye!');
                     return [4 /*yield*/, client.end()];
                 case 19:
-                    _b.sent();
-                    process.exit(0);
+                    _b.sent(); // Close the database connection
+                    process.exit(0); // Exit the process
                     _b.label = 20;
                 case 20: return [3 /*break*/, 2];
                 case 21: return [3 /*break*/, 23];
                 case 22:
                     error_1 = _b.sent();
-                    console.error('Error connecting to the database:', error_1);
+                    console.error('Error connecting to the database:', error_1); // Handle connection errors
                     return [3 /*break*/, 23];
                 case 23: return [2 /*return*/];
             }
         });
     });
 }
-main();
+main(); // Start the application

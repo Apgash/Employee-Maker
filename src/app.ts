@@ -86,7 +86,7 @@ async function addRole() {
 // Function to add an employee
 async function addEmployee() {
   const rolesRes = await client.query('SELECT id, title FROM roles');
-  const employeesRes = await client.query('SELECT id, CONCAT(first_name, " ", last_name) AS name FROM employees');
+  const employeesRes = await client.query('SELECT id, CONCAT(first_name, \' \', last_name) AS name FROM employees');
   const { first_name, last_name, role_id, manager_id } = await inquirer.prompt([
     {
       name: 'first_name',
@@ -123,7 +123,7 @@ async function addEmployee() {
 
 // Function to update an employee role
 async function updateEmployeeRole() {
-  const employeesRes = await client.query('SELECT id, CONCAT(first_name, " ", last_name) AS name FROM employees');
+  const employeesRes = await client.query('SELECT id, CONCAT(first_name, \' \', last_name) AS name FROM employees');
   const rolesRes = await client.query('SELECT id, title FROM roles');
   const { employee_id, role_id } = await inquirer.prompt([
     {
