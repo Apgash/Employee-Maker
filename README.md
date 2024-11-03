@@ -1,6 +1,6 @@
 # Employee Builder
  
-Walkthrough Video: 
+Walkthrough Video: https://app.screencastify.com/v3/watch/2rUcSdNghhFgnS8mvK4e
 
 This repository was generated using my own "README Generator!" code you can check it out on my github!
 
